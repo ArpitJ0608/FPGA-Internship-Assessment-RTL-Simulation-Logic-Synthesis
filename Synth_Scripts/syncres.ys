@@ -1,0 +1,7 @@
+read_verilog dff_syncres.v
+synth -top dff_syncres
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+write_verilog -noattr synth_sync_res.v
+stat -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
