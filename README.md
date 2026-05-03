@@ -163,7 +163,7 @@ At **t = 121 ns**, the marker is added for `sel = 1`. For that part of the wavef
 
 #### Waveform Analysis – GTK_SIM2 (Marker at 64900 ps, `sel = 0`)
 
-![GTK_SIM2](Day1_RTL_Simulation/good_mux/waveforms/GTK_SIM2.png)
+![GTK_SIM2](./Result_Screenshots/GTK_SIM2.png)
 
 At **t ≈ 65 ns**, `sel = 0`, and therefore `y` is tracing `i0`:
 
@@ -229,7 +229,7 @@ endmodule
 
 #### Waveform Analysis – GTK_ASYRES_SIM1 (Marker at 1596500 ps / ~1597 ns)
 
-![GTK_ASYRES_SIM1](Day1_RTL_Simulation/dff_asyncres/waveforms/GTK_ASYRES_SIM1.png)
+![GTK_ASYRES_SIM1](./Result_Screenshots/GTK_ASYRES_SIM1.png)
 
 The following figure illustrates the transient region near **t = 1596 ns**, where `async_reset` **releases**:
 
@@ -242,7 +242,7 @@ The following figure illustrates the transient region near **t = 1596 ns**, wher
 
 #### Waveform Analysis – GTK_ASYRES_SIM2 (Marker at 1641 ns — zoomed detail)
 
-![GTK_ASYRES_SIM2](Day1_RTL_Simulation/dff_asyncres/waveforms/GTK_ASYRES_SIM2.png)
+![GTK_ASYRES_SIM2](./Result_Screenshots/GTK_ASYRES_SIM2.png)
 
 Below is an expanded view of the **1620–1660 ns** period with `async_reset = 0` (de-asserted reset):
 
@@ -256,7 +256,7 @@ Below is an expanded view of the **1620–1660 ns** period with `async_reset = 0
 
 #### Waveform Analysis – GTK_ASYRES_SIM3 (Marker at 1094 ns — reset assertion)
 
-![GTK_ASYRES_SIM3](Day1_RTL_Simulation/dff_asyncres/waveforms/GTK_ASYRES_SIM3.png)
+![GTK_ASYRES_SIM3](./Result_Screenshots/GTK_ASYRES_SIM3.png)
 
 This figure captures the point when `async_reset` goes **HIGH** (asserted) roughly around **t = 1094 ns** (marked red):
 
@@ -314,7 +314,7 @@ The testbench is structurally identical to the async reset testbench — same ti
 
 #### Waveform Analysis – GTK_ASY_SET_S1 (Marker at 570 ns)
 
-![GTK_ASY_SET_S1](Day1_RTL_Simulation/dff_async_set/waveforms/GTK_ASY_SET_S1.png)
+![GTK_ASY_SET_S1](./Result_Screenshots/GTK_ASY_SET_S1.png)
 
 The above image illustrates the section from **500 to 650 ns** during which the **deassert** of the signal `async_set` takes place:
 
@@ -326,7 +326,7 @@ The above image illustrates the section from **500 to 650 ns** during which the 
 
 #### Waveform Analysis – GTK_ASY_SET_S2 (Marker at 1094 ns — async set assertion)
 
-![GTK_ASY_SET_S2](Day1_RTL_Simulation/dff_async_set/waveforms/GTK_ASY_SET_S2.png)
+![GTK_ASY_SET_S2](./Result_Screenshots/GTK_ASY_SET_S2.png)
 
 The image below presents the range of **1050-1200+ ns** when `async_set` is **HIGH** again:
 
@@ -384,7 +384,7 @@ Notable difference: `sync_reset` toggles every 113 ns (much more frequently than
 
 #### Waveform Analysis – GTK_SYRES_S1 (Marker at 565 ns — sync reset active)
 
-![GTK_SYRES_S1](Day1_RTL_Simulation/dff_syncres/waveforms/GTK_SYRES_S1.png)
+![GTK_SYRES_S1](./Result_Screenshots/GTK_SYRES_S1.png)
 
 This scope window spans **400-750 ns**, and there are several `sync_reset` cycles:
 
@@ -398,7 +398,7 @@ This scope window spans **400-750 ns**, and there are several `sync_reset` cycle
 
 #### Waveform Analysis – GTK_SYRES_S2 (Marker at 1130 ns)
 
-![GTK_SYRES_S2](Day1_RTL_Simulation/dff_syncres/waveforms/GTK_SYRES_S2.png)
+![GTK_SYRES_S2](./Result_Screenshots/GTK_SYRES_S2.png)
 
 This window applies to the **1050 – 1250 ns** period where `sync_reset = 0`:
 
@@ -458,7 +458,7 @@ write_verilog -noattr mux_netlist.v
 
 #### Synthesized Schematic
 
-![block_goodmux](Day2_Synthesis/good_mux/block_goodmux.png)
+![block_goodmux](./Result_Screenshots/block_goodmux.png)
 
 **Schematic Analysis:**  
 - The `i0`, `i1`, and `sel` lines go through **input buffers (BUF)**, which are always part of the cell libraries due to signal integrity requirements.
@@ -470,7 +470,7 @@ write_verilog -noattr mux_netlist.v
 
 **Post-Synthesis Simulation 1 (`synth_sim1.png` — `sel = 0`):**
 
-![synth_sim1](Day2_Synthesis/good_mux/synth_sim1.png)
+![synth_sim1](./Result_Screenshots/synth_sim1.png)
 
 Simulation of the post-synthesis netlist involves the use of internal wires `_0_`, `_1_`, `_2_`, `_3_` (produced by Yosys for net connections within the BUF cells and the mux cell). When `sel = 0`:
 - The behavior of `y` follows `i0` accurately – the toggling signal pattern of 10 ns is reproduced.
@@ -479,7 +479,7 @@ Simulation of the post-synthesis netlist involves the use of internal wires `_0_
 
 **Post-Synthesis Simulation 2 (`synth_sim2.png` — `sel = 0` ending, transitioning to `sel = 1`):**
 
-![synth_sim2](Day2_Synthesis/good_mux/synth_sim2.png)
+![synth_sim2](./Result_Screenshots/synth_sim2.png)
 
 The `sel` wire being 0 in the initial part, the `y` follows `i0`, which is 1 at the beginning of this waveform view. Around t = 150 ns, `sel` transitions HIGH, and `y` begins to follow `i1`. Once again, the internal wiring demonstrates the propagation along the BUFs. Thus, the netlist generated from RTL has been verified with no functional errors made — **RTL-to-gates synthesis is validated**.
 
@@ -525,7 +525,7 @@ show multiple_modules
 
 **Synthesized Schematic (Hierarchical):**
 
-![block_multi_hier](Day2_Synthesis/multiple_modules/block_multi_hier.png)
+![block_multi_hier](./Result_Screenshots/block_multi_hier.png)
 
 Module boundaries are retained during hierarchical synthesis. The diagram illustrates:
 - `a` and `b` are inputs to `u1 (sub_module1)` as a black box, meaning that the AND function is implemented within `u1`.
@@ -535,7 +535,7 @@ Module boundaries are retained during hierarchical synthesis. The diagram illust
 
 **Synthesis Statistics (Hierarchical):**
 
-![synth_multi_hier_res1](Day2_Synthesis/multiple_modules/synth_multi_hier_res1.png)
+![synth_multi_hier_res1](./Result_Screenshots/synth_multi_hier_res1.png)
 
 ```
 === multiple_modules ===
@@ -550,7 +550,7 @@ Module boundaries are retained during hierarchical synthesis. The diagram illust
   Mapped to sky130_fd_sc_hd__or2_0
 ```
 
-![synth_multi_hier_res2](Day2_Synthesis/multiple_modules/synth_multi_hier_res2.png)
+![synth_multi_hier_res2](./Result_Screenshots/synth_multi_hier_res2.png)
 
 ```
 === design hierarchy ===
@@ -563,7 +563,7 @@ Module boundaries are retained during hierarchical synthesis. The diagram illust
 
 **Sub-module 1 Synthesized Schematic:**
 
-![block_subm1](Day2_Synthesis/multiple_modules/block_subm1.png)
+![block_subm1](./Result_Screenshots/block_subm1.png)
 
 `sub_module1` synthesizes to a single `sky130_fd_sc_hd__and2_0` cell (2-input AND gate). Inputs `a` and `b` are buffered, feed into the AND cell, and the output is buffered before reaching `y`. Minimal and optimal.
 
@@ -583,7 +583,7 @@ show multiple_modules
 
 **Synthesized Schematic (Flat):**
 
-![block_multi_flat](Day2_Synthesis/multiple_modules/block_multi_flat.png)
+![block_multi_flat](./Result_Screenshots/block_multi_flat.png)
 
 With the `-flatten` flag, Yosys **dissolves all module boundaries** and exposes every gate in a single flat netlist. The schematic now shows:
 - `b` → BUF → `u1.b` → BUF → input B of `sky130_fd_sc_hd__and2_0` (`$100`)
@@ -594,7 +594,7 @@ With the `-flatten` flag, Yosys **dissolves all module boundaries** and exposes 
 
 **Flat Synthesis Statistics:**
 
-![synth_multi_flat_res](Day2_Synthesis/multiple_modules/synth_multi_flat_res.png)
+![synth_multi_flat_res](./Result_Screenshots/synth_multi_flat_res.png)
 
 ```
 === multiple_modules ===
@@ -647,13 +647,13 @@ No logic gates are required — this is just bit-position mapping.
 
 **Synthesized Schematic:**
 
-![block_mult2](Day2_Synthesis/mul2_mul8/block_mult2.png)
+![block_mult2](./Result_Screenshots/block_mult2.png)
 
 The above diagram represents only the **wiring connections** where the three bits of the input signal `a` (2:0) are wired directly to bits 3:1 of the output signal `y`, while bit 0 of `y` is connected to the value 0. It can be expressed as the pass-through mapping (2:0 - 3:1, 0 -> 0:0).
 
 **Synthesis Statistics:**
 
-![synth_mult2_res](Day2_Synthesis/mul2_mul8/synth_mult2_res.png)
+![synth_mult2_res](./Result_Screenshots/synth_mult2_res.png)
 
 ```
 === mul2 ===
@@ -681,13 +681,13 @@ Mathematically: if `a = 5` (101₂), then `a*9 = 45 = 101101₂ = {5, 5}`. This 
 
 **Synthesized Schematic:**
 
-![block_mult8](Day2_Synthesis/mul2_mul8/block_mult8.png)
+![block_mult8](./Result_Screenshots/block_mult8.png)
 
 The schematic shows a **2x duplication of the input bus**: `a[2:0]` is wired to both `y[5:3]` and `y[2:0]` directly. Label `2x 2:0 - 5:0` confirms this. No arithmetic hardware needed.
 
 **Synthesis Statistics:**
 
-![synth_mult8_res](Day2_Synthesis/mul2_mul8/synth_mult8_res.png)
+![synth_mult8_res](./Result_Screenshots/synth_mult8_res.png)
 
 ```
 === mult8 ===
@@ -722,7 +722,7 @@ write_verilog -noattr asyres_netlist.v
 
 **Synthesized Schematic:**
 
-![block_asyres](Day2_Synthesis/dff_variants/block_asyres.png)
+![block_asyres](./Result_Screenshots/block_asyres.png)
 
 - `async_reset` -> `sky130_fd_sc_hd__clkinv_1` (`$52`): Reset goes through a **clock inverter cell**. This is because the SKY130 `dfrtp` cell uses an active-low reset port (`RESET_B`), hence the active-high `async_reset` must be inverted first before being connected.
 - `sky130_fd_sc_hd__dfrtp_1` (`$47`): **D flip-flop with active-low asynchronous reset**; this corresponds most closely to the RTL functionality.
@@ -731,7 +731,7 @@ write_verilog -noattr asyres_netlist.v
 
 **Synthesis Statistics:**
 
-![synth_asynres_res](Day2_Synthesis/dff_variants/synth_asynres_res.jpeg)
+![synth_asynres_res](./Result_Screenshots/synth_asynres_res.jpeg)
 
 ```
 === dff_asyncres ===
@@ -755,7 +755,7 @@ write_verilog -noattr asynset_netlist.v
 
 **Synthesized Schematic:**
 
-![block_asyset](Day2_Synthesis/dff_variants/block_asyset.png)
+![block_asyset](./Result_Screenshots/block_asyset.png)
 
 - `async_set` → `sky130_fd_sc_hd__clkinv_1` (`$52`): Similar to the previous reset instance, since this time, the cell has a set input that is active-LOW (`SET_B`).
 - The DFF cell is now `sky130_fd_sc_hd__dfstp_2` (`$47`) — a **D flip-flop with asynchronous set input**. Different from the reset DFF cell, this is `dfstp` rather than `dfrtp`.
@@ -763,7 +763,7 @@ write_verilog -noattr asynset_netlist.v
 
 **Synthesis Statistics:**
 
-![synth_asyn_setres](Day2_Synthesis/dff_variants/synth_asyn_setres.jpeg)
+![synth_asyn_setres](./Result_Screenshots/synth_asyn_setres.jpeg)
 
 ```
 === dff_async_set ===
@@ -781,7 +781,7 @@ write_verilog -noattr asynset_netlist.v
 
 **Synthesized Schematic:**
 
-![block_syncres](Day2_Synthesis/dff_variants/block_syncres.png)
+![block_syncres](./Result_Screenshots/block_syncres.png)
 
 It should be noted that the design shown here differs greatly from other asynchronous designs:
 - **There is no separate cell for reset-DFF** because the reset operation is synchronous and thus can be achieved by simply combining a **basic DFF** (`sky130_fd_sc_hd__dfxtp_1`) and combinational circuits feeding into the **D** port.
@@ -790,7 +790,7 @@ It should be noted that the design shown here differs greatly from other asynchr
   
 **Synthesis Statistics:**
 
-![synth_syncres_res](Day2_Synthesis/dff_variants/synth_syncres_res.png)
+![synth_syncres_res](./Result_Screenshots/synth_syncres_res.png)
 
 ```
 === dff_syncres ===
