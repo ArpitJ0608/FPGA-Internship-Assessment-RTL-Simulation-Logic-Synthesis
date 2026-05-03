@@ -149,7 +149,7 @@ Here testbench is mapped with main module and working flow is:
 
 #### Waveform Analysis – GTK_SIM1 (Marker at 121 ns, `sel = 1`)
 
-![GTK_SIM1](Day1_RTL_Simulation/good_mux/waveforms/GTK_SIM1.png)
+![GTK_SIM1](./Result_Screenshots/GTK_SIM1.png)
 
 At **t = 121 ns**, the marker is added for `sel = 1`. For that part of the waveform:
 
