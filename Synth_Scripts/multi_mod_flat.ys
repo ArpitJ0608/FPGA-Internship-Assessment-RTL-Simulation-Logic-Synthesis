@@ -1,0 +1,17 @@
+read_verilog multiple_modules.v
+
+hierarchy -check -top multiple_modules
+proc;
+opt;
+synth -top multiple_modules -flatten
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+techmap;
+opt;
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show multiple_modules
+
+stat -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+write_verilog -noattr multi_mod_hier.v
