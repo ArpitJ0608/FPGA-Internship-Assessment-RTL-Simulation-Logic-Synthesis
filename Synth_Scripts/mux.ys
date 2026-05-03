@@ -1,0 +1,17 @@
+read_verilog good_mux.v
+
+hierarchy -check -top good_mux
+proc;
+opt;
+synth -top good_mux -flatten
+dfflibmap -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+techmap;
+opt;
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+show
+
+stat -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+write_verilog -noattr mux_netlist.v
